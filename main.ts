@@ -1,5 +1,4 @@
 import roleHarvester = require('./role.harvester');
-import * as _ from 'lodash';
 
 const SpawnName:string = 'Origins';
 

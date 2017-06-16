@@ -1,6 +1,5 @@
 "use strict";
 var roleHarvester = require("./role.harvester");
-var _ = require("lodash");
 var SpawnName = 'Origins';
 module.exports = {
     loop: function () {
