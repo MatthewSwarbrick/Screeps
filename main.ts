@@ -15,7 +15,7 @@ export = {
 
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 
-        if(harvesters.length < 2) {
+        if(harvesters.length < 5) {
             var newName = Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'harvester'});
         }
 
