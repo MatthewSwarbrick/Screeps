@@ -2,6 +2,8 @@
 var roleHarvester = require("./role.harvester");
 var roleUpgrader = require("./role.upgrader");
 var SpawnName = 'Origins';
+var TotalUpgraderCreepCount = 20;
+var TotalHarvesterCreepCount = 8;
 module.exports = {
     loop: function () {
         for (var name in Memory.creeps) {
@@ -12,10 +14,10 @@ module.exports = {
         }
         var harvesters = _.filter(Game.creeps, function (creep) { return creep.memory.role == 'harvester'; });
         var upgraders = _.filter(Game.creeps, function (creep) { return creep.memory.role == 'upgrader'; });
-        if (harvesters.length < 5) {
+        if (harvesters.length < TotalHarvesterCreepCount) {
             var newName = Game.spawns[SpawnName].createCreep([WORK, CARRY, MOVE], undefined, { role: 'harvester' });
         }
-        if (upgraders.length < 5) {
+        if (upgraders.length < TotalUpgraderCreepCount) {
             var newName = Game.spawns[SpawnName].createCreep([WORK, CARRY, MOVE], undefined, { role: 'upgrader' });
         }
         if (Game.spawns[SpawnName].spawning) {

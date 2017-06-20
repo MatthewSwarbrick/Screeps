@@ -2,6 +2,8 @@ import roleHarvester = require('./role.harvester');
 import roleUpgrader = require('./role.upgrader');
 
 const SpawnName:string = 'Origins';
+const TotalUpgraderCreepCount:number = 20;
+const TotalHarvesterCreepCount:number = 8;
 
 export = {
 
@@ -16,11 +18,11 @@ export = {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 
-        if(harvesters.length < 5) {
+        if(harvesters.length < TotalHarvesterCreepCount) {
             var newName = Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'harvester'});
         }
 
-        if(upgraders.length < 5) {
+        if(upgraders.length < TotalUpgraderCreepCount) {
             var newName = Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
         }
 
