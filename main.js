@@ -19,10 +19,10 @@ module.exports = {
         var harvesters = _.filter(Game.creeps, function (creep) { return creep.memory.role == 'harvester'; });
         var upgraders = _.filter(Game.creeps, function (creep) { return creep.memory.role == 'upgrader'; });
         if (harvesters.length < TotalHarvesterCreepCount) {
-            var newName = Game.spawns[SpawnName].createCreep([WORK, CARRY, MOVE], undefined, { role: 'harvester' });
+            Game.spawns[SpawnName].createCreep([WORK, CARRY, MOVE], undefined, { role: 'harvester' });
         }
-        if (upgraders.length < TotalUpgraderCreepCount) {
-            var newName = Game.spawns[SpawnName].createCreep([WORK, CARRY, MOVE], undefined, { role: 'upgrader' });
+        else if (upgraders.length < TotalUpgraderCreepCount) {
+            Game.spawns[SpawnName].createCreep([WORK, CARRY, MOVE], undefined, { role: 'upgrader' });
         }
         if (Game.spawns[SpawnName].spawning) {
             var spawningCreep = Game.creeps[Game.spawns[SpawnName].spawning.name];

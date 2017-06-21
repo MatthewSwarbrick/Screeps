@@ -25,11 +25,10 @@ export = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 
         if(harvesters.length < TotalHarvesterCreepCount) {
-            var newName = Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'harvester'});
+            Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'harvester'});
         }
-
-        if(upgraders.length < TotalUpgraderCreepCount) {
-            var newName = Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
+        else if(upgraders.length < TotalUpgraderCreepCount) {
+             Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
         }
 
         if(Game.spawns[SpawnName].spawning) {
