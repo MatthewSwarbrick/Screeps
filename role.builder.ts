@@ -22,17 +22,13 @@ var roleBuilder = {
 
 function getObjectsAtAndSurroundingLocation(room: Room, position: RoomPosition) : any[] {
     let objectsAtLocation = [];
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x - 1, position.y - 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x, position.y - 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x + 1, position.y - 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x + 1, position.y)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x + 1, position.y + 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x, position.y + 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x - 1, position.y + 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x, position.y - 1)));
+    for(let x = -1; x <= 1; x++) {
+        for(let y = -1; y <= 1; y++) {
+            objectsAtLocation.push(room.lookAt(position.x + x, position.y + y));
+        }
+    }
 
-    return objectsAtLocation;
+    return _.flattenDeep(objectsAtLocation);
 }
 
 export = roleBuilder;

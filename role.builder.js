@@ -17,15 +17,11 @@ var roleBuilder = {
 };
 function getObjectsAtAndSurroundingLocation(room, position) {
     var objectsAtLocation = [];
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x - 1, position.y - 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x, position.y - 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x + 1, position.y - 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x + 1, position.y)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x + 1, position.y + 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x, position.y + 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x - 1, position.y + 1)));
-    objectsAtLocation.push(_.flattenDeep(room.lookAt(position.x, position.y - 1)));
-    return objectsAtLocation;
+    for (var x = -1; x <= 1; x++) {
+        for (var y = -1; y <= 1; y++) {
+            objectsAtLocation.push(room.lookAt(position.x + x, position.y + y));
+        }
+    }
+    return _.flattenDeep(objectsAtLocation);
 }
 module.exports = roleBuilder;
