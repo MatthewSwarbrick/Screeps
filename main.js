@@ -2,9 +2,10 @@
 var roleHarvester = require("./role.harvester");
 var roleUpgrader = require("./role.upgrader");
 var defenceManager = require("./defenceManager");
+var buildManager = require("./buildManager");
 var SpawnName = 'Origins';
-var TotalUpgraderCreepCount = 20;
-var TotalHarvesterCreepCount = 8;
+var TotalUpgraderCreepCount = 10;
+var TotalHarvesterCreepCount = 20;
 module.exports = {
     loop: function () {
         for (var name in Memory.creeps) {
@@ -13,6 +14,7 @@ module.exports = {
                 console.log('Clearing non-existing creep memory:', name);
             }
         }
+        buildManager.buildExtensions();
         defenceManager.defendRooms();
         var harvesters = _.filter(Game.creeps, function (creep) { return creep.memory.role == 'harvester'; });
         var upgraders = _.filter(Game.creeps, function (creep) { return creep.memory.role == 'upgrader'; });

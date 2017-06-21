@@ -1,10 +1,11 @@
 import roleHarvester = require('./role.harvester');
 import roleUpgrader = require('./role.upgrader');
 import defenceManager = require('./defenceManager');
+import buildManager = require('./buildManager');
 
 const SpawnName:string = 'Origins';
-const TotalUpgraderCreepCount:number = 20;
-const TotalHarvesterCreepCount:number = 8;
+const TotalUpgraderCreepCount:number = 10;
+const TotalHarvesterCreepCount:number = 20;
 
 export = {
 
@@ -15,6 +16,8 @@ export = {
                 console.log('Clearing non-existing creep memory:', name);
             }
         }
+
+        buildManager.buildExtensions();
 
         defenceManager.defendRooms();
 
