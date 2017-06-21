@@ -8,7 +8,7 @@ var roleBuilder = {
             var pathLocation = pathToBuildExtensions.path[index];
             var objectsAtLocation = getObjectsAtAndSurroundingLocation(room, pathLocation);
 
-            if(objectsAtLocation.length > 0) {
+            if(objectsAtLocation.filter(o => o.type != "terrain").length > 0) {
                 continue;
             }
 

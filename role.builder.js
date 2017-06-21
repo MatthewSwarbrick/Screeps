@@ -5,7 +5,7 @@ var roleBuilder = {
         for (var index in pathToBuildExtensions.path) {
             var pathLocation = pathToBuildExtensions.path[index];
             var objectsAtLocation = getObjectsAtAndSurroundingLocation(room, pathLocation);
-            if (objectsAtLocation.length > 0) {
+            if (objectsAtLocation.filter(function (o) { return o.type != "terrain"; }).length > 0) {
                 continue;
             }
             if (room.createConstructionSite(pathLocation, structureType) != OK) {
