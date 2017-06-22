@@ -1,15 +1,15 @@
 "use strict";
 var roleBuilder = {
     build: function (room, structureType) {
-        var pathToBuildExtensions = PathFinder.search(room.controller.pos, room.find(FIND_MY_SPAWNS)[0].pos);
-        for (var index in pathToBuildExtensions.path) {
-            var pathLocation = pathToBuildExtensions.path[index];
+        var pathToBuildStructure = PathFinder.search(room.controller.pos, room.find(FIND_MY_SPAWNS)[0].pos);
+        for (var index in pathToBuildStructure.path) {
+            var pathLocation = pathToBuildStructure.path[index];
             var objectsAtLocation = getObjectsAtAndSurroundingLocation(room, pathLocation);
             if (objectsAtLocation.filter(function (o) { return o.type != "terrain"; }).length > 0) {
                 continue;
             }
             if (room.createConstructionSite(pathLocation, structureType) != OK) {
-                console.log("Can't create any more extensions");
+                console.log("Can't create any more " + structureType);
                 break;
             }
         }

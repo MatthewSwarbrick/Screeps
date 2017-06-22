@@ -2,10 +2,10 @@
 var roleBuilder = {
     build: function(room: Room, structureType: string) {
 
-        let pathToBuildExtensions = PathFinder.search(room.controller.pos, room.find<Spawn>(FIND_MY_SPAWNS)[0].pos);
+        let pathToBuildStructure = PathFinder.search(room.controller.pos, room.find<Spawn>(FIND_MY_SPAWNS)[0].pos);
 
-        for(var index in pathToBuildExtensions.path) {
-            var pathLocation = pathToBuildExtensions.path[index];
+        for(var index in pathToBuildStructure.path) {
+            var pathLocation = pathToBuildStructure.path[index];
             var objectsAtLocation = getObjectsAtAndSurroundingLocation(room, pathLocation);
 
             if(objectsAtLocation.filter(o => o.type != "terrain").length > 0) {
@@ -13,7 +13,7 @@ var roleBuilder = {
             }
 
             if(room.createConstructionSite(pathLocation, structureType) != OK) {
-                console.log("Can't create any more extensions");
+                console.log("Can't create any more " + structureType);
                 break;
             }
         }
