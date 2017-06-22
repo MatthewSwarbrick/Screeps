@@ -1,6 +1,7 @@
 "use strict";
 var roleBuilder = {
-    build: function (room, structureType) {
+    buildExtensions: function (room) {
+        var structureType = STRUCTURE_EXTENSION;
         var pathToBuildStructure = PathFinder.search(room.controller.pos, room.find(FIND_MY_SPAWNS)[0].pos);
         for (var index in pathToBuildStructure.path) {
             var pathLocation = pathToBuildStructure.path[index];
@@ -11,6 +12,23 @@ var roleBuilder = {
             if (room.createConstructionSite(pathLocation, structureType) != OK) {
                 console.log("Can't create any more " + structureType);
                 break;
+            }
+        }
+    },
+    buildRoads: function (room) {
+        var structureType = STRUCTURE_ROAD;
+        var pathToBuildStructures = [];
+        for (var index in Game.creeps) {
+            var path = Game.creeps[index].memory.path;
+            pathToBuildStructures.push(path);
+        }
+        for (var index in pathToBuildStructures) {
+            for (var pathIndex in pathToBuildStructures[index].path) {
+                var pathLocation = pathToBuildStructures[index].path[pathIndex];
+                if (room.createConstructionSite(pathLocation, structureType) != OK) {
+                    console.log("Can't create any more " + structureType);
+                    break;
+                }
             }
         }
     }
