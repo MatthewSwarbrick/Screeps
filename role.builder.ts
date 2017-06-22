@@ -31,8 +31,13 @@ var roleBuilder = {
         }
 
         for(let index in pathToBuildStructures) {
-            for(let pathIndex in pathToBuildStructures[index].path) {
-                let pathLocation = pathToBuildStructures[index].path[pathIndex];
+            for(let pathIndex in pathToBuildStructures[index]) {
+                let pathLocation = pathToBuildStructures[index][pathIndex];
+                let objectsAtLocation = room.lookAt(pathLocation);
+                
+                if(objectsAtLocation.filter(o => o.type != "terrain").length > 0) {
+                    continue;
+                }
 
                 if(room.createConstructionSite(pathLocation, structureType) != OK) {
                     console.log("Can't create any more " + structureType);
