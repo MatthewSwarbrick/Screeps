@@ -39,7 +39,7 @@ var roleBuilder = {
                     continue;
                 }
 
-                if(room.createConstructionSite(pathLocation, structureType) != OK) {
+                if(room.createConstructionSite(pathLocation.x, pathLocation.y, structureType) != OK) {
                     console.log("Can't create any more " + structureType);
                     break;
                 }
