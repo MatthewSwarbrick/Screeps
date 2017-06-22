@@ -25,7 +25,9 @@ var roleBuilder = {
         {
             let path = Game.creeps[index].memory.path;
 
-            pathToBuildStructures.push(path);
+            if(path) {
+                pathToBuildStructures.push(path);
+            }
         }
 
         for(let index in pathToBuildStructures) {
