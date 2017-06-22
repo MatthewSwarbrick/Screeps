@@ -1,9 +1,11 @@
 import roleHarvester = require('./role.harvester');
 import roleUpgrader = require('./role.upgrader');
+import roleBuilder = require('./role.builder');
 import defenceManager = require('./defenceManager');
 import buildManager = require('./buildManager');
 
 const SpawnName:string = 'Origins';
+const TotalBuilderCreepCount:number = 10;
 const TotalUpgraderCreepCount:number = 10;
 const TotalHarvesterCreepCount:number = 20;
 
@@ -17,18 +19,21 @@ export = {
             }
         }
 
-        buildManager.buildExtensions();
-
+        buildManager.buildStructures();
         defenceManager.defendRooms();
 
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
         if(harvesters.length < TotalHarvesterCreepCount) {
             Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'harvester'});
         }
         else if(upgraders.length < TotalUpgraderCreepCount) {
              Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
+        }
+        else if(builders.length < TotalBuilderCreepCount) {
+            Game.spawns[SpawnName].createCreep([WORK,CARRY,MOVE], undefined, {role: 'builder'});
         }
 
         if(Game.spawns[SpawnName].spawning) {
@@ -47,6 +52,9 @@ export = {
             }
             if(creep.memory.role == 'upgrader') {
                 roleUpgrader.run(creep);
+            }
+            if(creep.memory.role == 'builder') {
+                roleBuilder.run(creep);
             }
         }
     }

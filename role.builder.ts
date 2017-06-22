@@ -1,62 +1,29 @@
-
 var roleBuilder = {
-    buildExtensions: function(room: Room) {
-        let structureType = STRUCTURE_EXTENSION;
-        let pathToBuildStructure = PathFinder.search(room.controller.pos, room.find<Spawn>(FIND_MY_SPAWNS)[0].pos);
-
-        for(var index in pathToBuildStructure.path) {
-            var pathLocation = pathToBuildStructure.path[index];
-            var objectsAtLocation = getObjectsAtAndSurroundingLocation(room, pathLocation);
-
-            if(objectsAtLocation.filter(o => o.type != "terrain").length > 0) {
-                continue;
-            }
-
-            if(room.createConstructionSite(pathLocation, structureType) != OK) {
-                console.log("Can't create any more " + structureType);
-                break;
-            }
+    run: function(creep: Creep) {
+        if(creep.memory.building && creep.carry.energy == 0) {
+            creep.memory.building = false;
+            creep.say('harvest');
         }
-	},
-    buildRoads: function(room: Room) {
-        let structureType = STRUCTURE_ROAD;
-        let pathToBuildStructures = [];
-        for(let index in Game.creeps)
-        {
-            let path = Game.creeps[index].memory.path;
-
-            if(path) {
-                pathToBuildStructures.push(path);
-            }
+        if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.building = true;
+            creep.say('build');
         }
 
-        for(let index in pathToBuildStructures) {
-            for(let pathIndex in pathToBuildStructures[index]) {
-                let pathLocation = pathToBuildStructures[index][pathIndex];
-                let objectsAtLocation = room.lookAt(pathLocation.x, pathLocation.y);
-                
-                if(objectsAtLocation.filter(o => o.type != "terrain").length > 0) {
-                    continue;
+        if(creep.memory.building) {
+            var targets = creep.room.find<ConstructionSite>(FIND_CONSTRUCTION_SITES);
+            if(targets.length) {
+                if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
-
-                if(room.createConstructionSite(pathLocation.x, pathLocation.y, structureType) != OK) {
-                    console.log("Can't create any more " + structureType);
-                    break;
-                }
+            }
+        }
+        else {
+            var sources = creep.room.find<Source>(FIND_SOURCES);
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
 	}
 };
-
-function getObjectsAtAndSurroundingLocation(room: Room, position: RoomPosition) : any[] {
-    let objectsAtLocation = [];
-    for(let x = -1; x <= 1; x++) {
-        for(let y = -1; y <= 1; y++) {
-            objectsAtLocation.push(room.lookAt(position.x + x, position.y + y));
-        }
-    }
-
-    return _.flattenDeep(objectsAtLocation);
-}
 
 export = roleBuilder;
