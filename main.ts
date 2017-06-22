@@ -5,9 +5,9 @@ import defenceManager = require('./defenceManager');
 import buildManager = require('./buildManager');
 
 const SpawnName:string = 'Origins';
-const TotalBuilderCreepCount:number = 10;
-const TotalUpgraderCreepCount:number = 10;
-const TotalHarvesterCreepCount:number = 20;
+const TotalBuilderCreepCount:number = 5;
+const TotalUpgraderCreepCount:number = 5;
+const TotalHarvesterCreepCount:number = 5;
 
 export = {
 
