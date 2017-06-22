@@ -33,7 +33,7 @@ var roleBuilder = {
         for(let index in pathToBuildStructures) {
             for(let pathIndex in pathToBuildStructures[index]) {
                 let pathLocation = pathToBuildStructures[index][pathIndex];
-                let objectsAtLocation = room.lookAt(pathLocation);
+                let objectsAtLocation = room.lookAt(pathLocation.x, pathLocation.y);
                 
                 if(objectsAtLocation.filter(o => o.type != "terrain").length > 0) {
                     continue;

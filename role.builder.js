@@ -27,7 +27,7 @@ var roleBuilder = {
         for (var index in pathToBuildStructures) {
             for (var pathIndex in pathToBuildStructures[index]) {
                 var pathLocation = pathToBuildStructures[index][pathIndex];
-                var objectsAtLocation = room.lookAt(pathLocation);
+                var objectsAtLocation = room.lookAt(pathLocation.x, pathLocation.y);
                 if (objectsAtLocation.filter(function (o) { return o.type != "terrain"; }).length > 0) {
                     continue;
                 }
