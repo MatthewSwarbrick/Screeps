@@ -5,9 +5,9 @@ var roleBuilder = require("./role.builder");
 var defenceManager = require("./defenceManager");
 var buildManager = require("./buildManager");
 var SpawnName = 'Origins';
-var TotalBuilderCreepCount = 5;
-var TotalUpgraderCreepCount = 5;
-var TotalHarvesterCreepCount = 5;
+var TotalBuilderCreepCount = 6;
+var TotalUpgraderCreepCount = 8;
+var TotalHarvesterCreepCount = 10;
 module.exports = {
     loop: function () {
         for (var name in Memory.creeps) {
